@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Randy Pradibta — Portofolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf8f3;
+    --ink:#171412;
+    --cyan:#00acc8;
+    --magenta:#e5006e;
+    --yellow:#ffcc00;
+    --line: rgba(23,20,18,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--yellow); color:var(--ink); }
+
+  a{color:inherit;}
+
+  .halftone{
+    position:absolute; inset:0;
+    background-image: radial-gradient(var(--ink) 1px, transparent 1.4px);
+    background-size: 14px 14px;
+    opacity:0.06;
+    pointer-events:none;
+  }
+
+  nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 20px clamp(20px, 6vw, 72px);
+    background:rgba(250,248,243,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{
+    font-family:'Unbounded', sans-serif;
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:-0.02em;
+  }
+  .brand span{color:var(--magenta);}
+  .navlinks{ display:flex; gap: clamp(16px,3vw,36px); font-size:15px; font-weight:500; }
+  .navlinks a{ text-decoration:none; position:relative; padding:4px 0; }
+  .navlinks a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px;
+    background:var(--magenta); transition:width .25s ease;
+  }
+  .navlinks a:hover::after{ width:100%; }
+  .navlinks a{display:none;}
+  @media(min-width:640px){ .navlinks a{display:inline-block;} }
+
+  .hero{
+    position:relative;
+    padding: clamp(60px,10vw,120px) clamp(20px,6vw,72px) clamp(50px,8vw,90px);
+    overflow:hidden;
+  }
+  .hero-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:14px; font-weight:600; color:var(--ink);
+    background:var(--yellow);
+    padding:6px 14px; border-radius:100px;
+    margin-bottom:28px;
+    transform:rotate(-2deg);
+  }
+  .hero-name{
+    font-family:'Unbounded', sans-serif;
+    font-weight:900;
+    font-size:clamp(48px, 10vw, 108px);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+    position:relative;
+    display:inline-block;
+  }
+  .hero-name .misreg{
+    position:relative;
+    display:inline-block;
+  }
+  .hero-name .misreg::before,
+  .hero-name .misreg::after{
+    content: attr(data-text);
+    position:absolute; left:0; top:0;
+    width:100%;
+  }
+  .hero-name .misreg::before{ color:var(--cyan); transform:translate(3px, 3px); z-index:-1; }
+  .hero-name .misreg::after{ color:var(--magenta); transform:translate(-3px, -3px); z-index:-1; }
+
+  .hero-role{
+    font-size:clamp(17px,2.4vw,22px);
+    font-weight:500;
+    color:#4a4541;
+    margin-top:26px;
+    max-width:560px;
+    line-height:1.55;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap: 10px 28px;
+    margin-top:32px;
+    font-size:14.5px; font-weight:500;
+  }
+  .hero-meta a{ text-decoration:none; display:flex; align-items:center; gap:8px; }
+  .dot{ width:6px; height:6px; border-radius:50%; background:var(--ink); display:inline-block; }
+
+  .hero-cta{ display:flex; gap:14px; margin-top:40px; flex-wrap:wrap; }
+  .btn{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:700; font-size:15px;
+    padding:14px 28px; border-radius:10px;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    border:2px solid var(--ink);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .btn-solid{ background:var(--ink); color:var(--paper); }
+  .btn-solid:hover{ transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--magenta); }
+  .btn-outline{ background:transparent; color:var(--ink); }
+  .btn-outline:hover{ transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--cyan); }
+
+  .avatar-slot{
+    position:absolute; right:clamp(10px,6vw,80px); top:clamp(60px,10vw,110px);
+    width:clamp(120px,16vw,200px); height:clamp(120px,16vw,200px);
+    border-radius:50%;
+    border:2.5px dashed rgba(23,20,18,0.35);
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; font-size:12.5px; font-weight:600; color:#8a8480;
+    padding:14px; line-height:1.4;
+    background:repeating-linear-gradient(135deg, rgba(0,172,200,0.06) 0 10px, rgba(229,0,110,0.06) 10px 20px);
+  }
+  @media(max-width:760px){ .avatar-slot{ display:none; } }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding: clamp(50px,8vw,90px) clamp(20px,6vw,72px); position:relative; }
+  .section-inner{ max-width:1080px; margin:0 auto; }
+  .eyebrow-num{
+    font-family:'Unbounded', sans-serif;
+    font-size:13px; font-weight:700; color:var(--magenta);
+  }
+  h2.section-title{
+    font-family:'Unbounded', sans-serif;
+    font-size:clamp(28px,4.2vw,44px);
+    font-weight:800;
+    letter-spacing:-0.01em;
+    margin-top:8px;
+    margin-bottom: clamp(28px,5vw,48px);
+  }
+
+  .about{ background:var(--ink); color:var(--paper); }
+  .about .eyebrow-num{ color:var(--yellow); }
+  .about-grid{
+    display:grid; grid-template-columns: 1.3fr 1fr; gap:48px; align-items:start;
+  }
+  @media(max-width:760px){ .about-grid{ grid-template-columns:1fr; } }
+  .about p{ font-size:clamp(17px,2vw,20px); line-height:1.75; color:#e8e4de; max-width:60ch; }
+  .stat-card{
+    background:#221e1a; border:1px solid rgba(250,248,243,0.12);
+    border-radius:16px; padding:28px;
+  }
+  .stat-big{ font-family:'Unbounded'; font-size:44px; font-weight:800; color:var(--yellow); }
+  .stat-label{ font-size:14px; color:#b7b0a8; margin-top:6px; }
+  .stat-card + .stat-card{ margin-top:16px; }
+
+  .exp-card{
+    border:2px solid var(--ink); border-radius:18px;
+    padding: clamp(24px,4vw,44px);
+    position:relative; overflow:hidden;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(0,172,200,0.10), transparent 55%),
+      radial-gradient(circle at 0% 100%, rgba(229,0,110,0.10), transparent 55%);
+  }
+  .exp-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:22px; }
+  .exp-title{ font-family:'Unbounded'; font-weight:700; font-size:clamp(20px,2.6vw,26px); }
+  .exp-time{
+    font-size:13px; font-weight:700; background:var(--cyan); color:var(--ink);
+    padding:6px 14px; border-radius:100px; white-space:nowrap;
+  }
+  .exp-list{ list-style:none; display:grid; gap:14px; }
+  .exp-list li{ display:flex; gap:12px; font-size:16px; line-height:1.6; }
+  .exp-list li::before{
+    content:''; flex-shrink:0; width:10px; height:10px; margin-top:7px;
+    background:var(--magenta); border-radius:2px; transform:rotate(45deg);
+  }
+
+  .timeline{ position:relative; padding-left:32px; }
+  .timeline::before{
+    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:2px;
+    background: linear-gradient(var(--cyan), var(--magenta), var(--yellow));
+  }
+  .tl-item{ position:relative; padding-bottom:36px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:''; position:absolute; left:-32px; top:4px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--paper); border:3px solid var(--ink);
+  }
+  .tl-year{ font-family:'Unbounded'; font-size:13px; font-weight:700; color:var(--magenta); }
+  .tl-school{ font-size:19px; font-weight:700; margin-top:4px; }
+  .tl-note{ font-size:15px; color:#5c5650; margin-top:4px; }
+  .badge-achieve{
+    display:inline-flex; align-items:center; gap:8px; margin-top:10px;
+    background:var(--yellow); padding:7px 14px; border-radius:100px;
+    font-size:13.5px; font-weight:700;
+  }
+
+  .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; }
+  .skill-card{
+    border-radius:16px; padding:26px; color:var(--ink);
+    position:relative; overflow:hidden;
+    border:2px solid var(--ink);
+  }
+  .skill-card h3{ font-family:'Unbounded'; font-size:18px; font-weight:700; margin-bottom:10px; }
+  .skill-card p{ font-size:14.5px; line-height:1.6; color:#3a3632; }
+  .sk-c{ background:#d7f4fa; }
+  .sk-m{ background:#fbdcec; }
+  .sk-y{ background:#fff2c2; }
+  .sk-k{ background:#e7e4de; }
+
+  .achieve{
+    display:flex; align-items:center; gap: clamp(20px,4vw,40px);
+    border:2px dashed var(--ink); border-radius:20px;
+    padding: clamp(24px,4vw,40px);
+    flex-wrap:wrap;
+  }
+  .achieve-icon{
+    font-family:'Unbounded'; font-weight:900; font-size:38px;
+    width:88px; height:88px; border-radius:50%;
+    background:var(--magenta); color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .achieve-title{ font-family:'Unbounded'; font-weight:700; font-size:clamp(19px,2.4vw,24px); }
+  .achieve-sub{ font-size:15px; color:#5c5650; margin-top:6px; }
+
+  footer{
+    background:var(--ink); color:var(--paper);
+    padding: clamp(60px,9vw,110px) clamp(20px,6vw,72px) 40px;
+    text-align:center;
+  }
+  footer .section-title{ color:var(--paper); }
+  .contact-line{ font-size:clamp(16px,2vw,19px); color:#cfc9c2; max-width:56ch; margin:0 auto 36px; line-height:1.7; }
+  .contact-btns{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+  footer .btn-solid{ background:var(--yellow); color:var(--ink); border-color:var(--yellow); }
+  footer .btn-solid:hover{ box-shadow:4px 4px 0 var(--cyan); }
+  footer .btn-outline{ color:var(--paper); border-color:var(--paper); }
+  footer .btn-outline:hover{ box-shadow:4px 4px 0 var(--magenta); }
+  .foot-note{ margin-top:56px; font-size:13px; color:#8a8480; }
+
+  @keyframes heroIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+  .hero-tag, .hero-name, .hero-role, .hero-meta, .hero-cta{
+    animation: heroIn .7s cubic-bezier(.2,.7,.3,1) both;
+  }
+  .hero-name{ animation-delay:.08s; }
+  .hero-role{ animation-delay:.16s; }
+  .hero-meta{ animation-delay:.22s; }
+  .hero-cta{ animation-delay:.28s; }
+  @media (prefers-reduced-motion: reduce){
+    .hero-tag, .hero-name, .hero-role, .hero-meta, .hero-cta{ animation:none; }
+  }
+
+  @keyframes misreg-shift{
+    0%, 100%{ transform:translate(3px,3px); }
+    50%{ transform:translate(4.5px,1.5px); }
+  }
+  @keyframes misreg-shift-m{
+    0%, 100%{ transform:translate(-3px,-3px); }
+    50%{ transform:translate(-4.5px,-1.5px); }
+  }
+  .hero-name .misreg::before{ animation: misreg-shift 5s ease-in-out infinite; }
+  .hero-name .misreg::after{ animation: misreg-shift-m 5s ease-in-out infinite; }
+
+  @keyframes float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-8px); } }
+  .avatar-slot{ animation: float 4.5s ease-in-out infinite; }
+
+  [data-reveal]{
+    opacity:0; transform:translateY(28px);
+    transition: opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+  [data-reveal].in{ opacity:1; transform:translateY(0); }
+  [data-reveal-stagger] > *{
+    opacity:0; transform:translateY(22px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  [data-reveal-stagger].in > *{ opacity:1; transform:translateY(0); }
+  [data-reveal-stagger].in > *:nth-child(1){ transition-delay:.02s; }
+  [data-reveal-stagger].in > *:nth-child(2){ transition-delay:.10s; }
+  [data-reveal-stagger].in > *:nth-child(3){ transition-delay:.18s; }
+  [data-reveal-stagger].in > *:nth-child(4){ transition-delay:.26s; }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-name .misreg::before, .hero-name .misreg::after{ animation:none; }
+    .avatar-slot{ animation:none; }
+    [data-reveal], [data-reveal-stagger] > *{
+      opacity:1; transform:none; transition:none;
+    }
+  }
+
+  .exp-card, .skill-card, .stat-card, .tl-item, .achieve{
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .exp-card:hover{ transform:translateY(-4px); box-shadow:6px 6px 0 var(--ink); }
+  .skill-card:hover{ transform:translateY(-6px) rotate(-0.5deg); box-shadow:5px 5px 0 var(--ink); }
+  .stat-card:hover{ transform:translateY(-3px); }
+  .achieve:hover{ transform:translateY(-4px); box-shadow:6px 6px 0 var(--yellow); }
+  .achieve-icon{ transition: transform .35s ease; }
+  .achieve:hover .achieve-icon{ transform: rotate(-12deg) scale(1.08); }
+  .tl-item::before{ transition: transform .3s ease, background .3s ease; }
+  .tl-item:hover::before{ transform:scale(1.3); background:var(--magenta); border-color:var(--magenta); }
+
+  nav{ transition: box-shadow .3s ease; }
+  nav.scrolled{ box-shadow:0 4px 18px rgba(23,20,18,0.06); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">RANDY<span>.</span></div>
+  <div class="navlinks">
+    <a href="#profil">Profil</a>
+    <a href="#pengalaman">Pengalaman</a>
+    <a href="#pendidikan">Pendidikan</a>
+    <a href="#kemampuan">Kemampuan</a>
+    <a href="#kontak">Kontak</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="halftone"></div>
+  <div class="hero-tag">✦ Siap kerja — lulusan 2024</div>
+  <h1 class="hero-name">
+    <span class="misreg" data-text="RANDY">RANDY</span><br>
+    <span class="misreg" data-text="PRADIBTA">PRADIBTA</span>
+  </h1>
+  <p class="hero-role">Designer &amp; Percetakan yang teliti, komunikasi yang lancar, dan semangat belajar yang nggak ada matinya. Siap gabung jadi bagian dari tim kerja profesional.
+</p>
+
+  <div class="hero-meta">
+    <a href="tel:+6285733686820"><span class="dot"></span>+62 857-3368-6820</a>
+    <a href="mailto:randypradibta321@gmail.com"><span class="dot"></span>randypradibta321@gmail.com</a>
+    <span><span class="dot"></span>Slempit, Kedamean, Gresik</span>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#pengalaman" class="btn btn-solid">Lihat Pengalaman ↓</a>
+    <a href="#kontak" class="btn btn-outline">Hubungi Saya</a>
+  </div>
+
+  <div class="avatar-slot">
+   <img src="foto_HD (1).jpg" alt="Randy Pradibta" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+  </div>
+  </div>
+</header>
+
+<section class="about" id="profil">
+  <div class="section-inner">
+    <div class="eyebrow-num">Profil</div>
+    <h2 class="section-title">Siapa Randy?</h2>
+    <div class="about-grid">
+      <p data-reveal>Lulusan SMA tahun 2024 dengan motivasi tinggi untuk memulai karier profesional. Punya kemampuan analisis, komunikasi, dan kerja sama tim yang baik, serta selalu berusaha memberikan hasil kerja yang optimal. Siap menghadapi tantangan baru dan terus mengembangkan kompetensi sesuai kebutuhan industri.</p>
+      <div data-reveal>
+        <div class="stat-card">
+          <div class="stat-big">1 Th</div>
+          <div class="stat-label">Pengalaman di bidang percetakan & Designer</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-big">2024</div>
+          <div class="stat-label">Lulus SMA Jurusan IPA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pengalaman">
+  <div class="section-inner">
+    <div class="eyebrow-num">Pengalaman</div>
+    <h2 class="section-title">Bidang Percetakan</h2>
+    <div class="exp-card" data-reveal>
+      <div class="exp-head">
+        <div class="exp-title">Operator &amp; Desainer Percetakan</div>
+        <div class="exp-time">± 1 Tahun</div>
+      </div>
+      <ul class="exp-list">
+        <li>Terbiasa mengoperasikan mesin print untuk berbagai kebutuhan percetakan.</li>
+        <li>Membuat desain sederhana seperti logo, banner, dan kebutuhan visual lainnya lewat Canva.</li>
+        <li>Menyesuaikan desain dengan kebutuhan dan permintaan pelanggan.</li>
+        <li>Mampu mengoperasikan, membuat, dan mengedit dokumen lewat Microsoft Word.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="pendidikan">
+  <div class="section-inner">
+    <div class="eyebrow-num">Pendidikan</div>
+    <h2 class="section-title">Riwayat Sekolah</h2>
+    <div class="timeline" data-reveal>
+      <div class="tl-item">
+        <div class="tl-year">2021 – 2024</div>
+        <div class="tl-school">SMA 1 Kedamean</div>
+        <div class="tl-note">Jurusan IPA</div>
+        <div class="badge-achieve">🏆 Juara 1 Harapan Kabupaten — Mobile Legends: Bang Bang</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2018 – 2021</div>
+        <div class="tl-school">SMP UDKP Kedamean</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2012 – 2018</div>
+        <div class="tl-school">SDN Miyono 1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kemampuan">
+  <div class="section-inner">
+    <div class="eyebrow-num">Kemampuan</div>
+    <h2 class="section-title">Apa yang Randy Bisa</h2>
+    <div class="skills-grid" data-reveal-stagger>
+      <div class="skill-card sk-c">
+        <h3>Bahasa Inggris</h3>
+        <p>Memahami Bahasa Inggris dasar, baik dalam membaca maupun percakapan sederhana.</p>
+      </div>
+      <div class="skill-card sk-m">
+        <h3>Kerja Tim</h3>
+        <p>Bisa bekerja sama dengan baik dalam tim, saling membantu, dan menyelesaikan tugas bersama.</p>
+      </div>
+      <div class="skill-card sk-y">
+        <h3>Public Speaking</h3>
+        <p>Cukup percaya diri berbicara di depan orang lain dan menyampaikan pendapat atau informasi.</p>
+      </div>
+      <div class="skill-card sk-k">
+        <h3>Paham Teknologi</h3>
+        <p>Terbiasa menggunakan komputer, aplikasi, dan teknologi untuk membantu menyelesaikan pekerjaan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="eyebrow-num">Prestasi</div>
+    <h2 class="section-title">Di Luar Kerjaan</h2>
+    <div class="achieve" data-reveal>
+      <div class="achieve-icon">🥈</div>
+      <div>
+        <div class="achieve-title">Juara 1 Harapan Tingkat Kabupaten</div>
+        <div class="achieve-sub">Divisi Mobile Legends: Bang Bang (MLBB) — bukti kerja tim &amp; strategi nggak cuma di kertas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="kontak">
+  <div class="eyebrow-num" style="color:var(--yellow)">Kontak</div>
+  <h2 class="section-title">Yuk, Kerja Bareng</h2>
+  <p class="contact-line">Terbuka untuk peluang kerja maupun kolaborasi di bidang desain dan percetakan. Hubungi lewat WhatsApp atau email, gas dibalas cepat.</p>
+  <div class="contact-btns">
+    <a class="btn btn-solid" href="https://wa.me/6285733686820" target="_blank" rel="noopener">Chat WhatsApp</a>
+    <a class="btn btn-outline" href="mailto:randypradibta321@gmail.com">Kirim Email</a>
+  </div>
+  <div class="foot-note">Randy Pradibta — Slempit, Kedamean, Gresik</div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('[data-reveal], [data-reveal-stagger]');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:'0px 0px -60px 0px' });
+    revealEls.forEach(el=>io.observe(el));
+  } else {
+    revealEls.forEach(el=>el.classList.add('in'));
+  }
+
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', ()=>{
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive:true });
+</script>
+
+</body>
+</html>
